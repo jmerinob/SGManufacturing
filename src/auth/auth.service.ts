@@ -9,8 +9,8 @@ export class AuthService {
 
   async signPayload(payload: Payload) {
     console.log('auth.servie', payload);
-    return sign(payload, 'asdfasdfadsfasdfadfr42432343423', {
-      expiresIn: '7d',
+    return sign(payload, 'fgh46jh356j357k467k46k46ki356u24y13t~#€4567', {
+      expiresIn: '1d',
     });
   }
 

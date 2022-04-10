@@ -23,7 +23,7 @@ import { MachineService } from './machine.service';
 export class MachineController {
   constructor(private machineService: MachineService) {}
 
-  @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard('jwt'))
   @Post('/create')
   async createPost(@Res() res, @Body() createMachineDTO: CreateMachineDTO) {
     const machine = await this.machineService.createMachine(createMachineDTO);
@@ -48,18 +48,7 @@ export class MachineController {
   }
 
   @Delete('/delete')
-  @UseGuards(AuthGuard('jwt'))
-  async deleteMachine(@Res() res, @Query('machineID') machineID) {
-    const machineDeleted = await this.machineService.deleteMachine(machineID);
-    if (!machineDeleted) throw new NotFoundException('Machineo no existe');
-    return res.status(HttpStatus.OK).json({
-      message: 'Machine Deleted Succesfully',
-      machineDeleted,
-    });
-  }
-
-  @Put('/update')
-  @UseGuards(AuthGuard('jwt'))
+  //@UseGuards(AuthGuard('jwt'))
   async updateMachine(
     @Res() res,
     @Body() createMachineDTO: CreateMachineDTO,

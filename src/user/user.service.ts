@@ -23,6 +23,7 @@ export class UserService {
     return this.sanitizeUser(createdUser);
   }
 
+
   async findByLogin(UserDTO: LoginDTO) {
     const { email, password } = UserDTO;
     const user = await this.userModel.findOne({ email });

@@ -8,7 +8,7 @@ import { MachineModule } from './machine/machine.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+//import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
@@ -16,7 +16,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     ConfigModule.forRoot(),
     MongooseModule.forRoot('mongodb://localhost/machines-nest-tutorial'),
     UserModule,
-    AuthModule,
+    AuthModule/*,
     ClientsModule.register([
       {
         name: 'TEST_CLIENT',
@@ -26,7 +26,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
           url: 'mqtt://localhost:1883',
         },
       },
-    ]),
+    ]),*/
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -25,15 +25,15 @@ export class AuthController {
 
   @Post('register')
   async register(@Body() RegisterDTO: RegisterDTO) {
-    console.log('RegisterDTO', RegisterDTO);
+    //console.log('RegisterDTO', RegisterDTO);
     const user = await this.userService.create(RegisterDTO);
     console.log('auth_controller', user);
     const payload = {
       email: user.email,
       password: user.password,
     };
-
     const token = await this.authService.signPayload(payload);
+
     return { user, token };
   }
   @Post('login')

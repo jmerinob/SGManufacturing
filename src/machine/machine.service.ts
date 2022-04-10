@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Machine } from './interfaces/machine.interface';
@@ -21,8 +21,17 @@ export class MachineService {
   }
 
   async createMachine(createMachineDTO: CreateMachineDTO): Promise<Machine> {
-    const machine = new this.machineModel(createMachineDTO);
-    await machine.save();
+    const { name } = createMachineDTO;
+
+    const machine = await this.machineModel.findOne({name});
+    console.log(machine);
+    if (machine) {
+      throw new HttpException('machine already exists', HttpStatus.BAD_REQUEST);
+    } else {
+      const createdMachine = new this.machineModel(createMachineDTO);
+      await createdMachine.save();
+      return createdMachine;
+    }
     return machine;
   }
 

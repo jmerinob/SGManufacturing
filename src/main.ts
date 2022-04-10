@@ -1,11 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+//import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const appMqtt = await NestFactory.createMicroservice<MicroserviceOptions>(
+  /*const appMqtt = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
     {
       transport: Transport.MQTT,
@@ -14,8 +14,11 @@ async function bootstrap() {
         url: 'mqtt://localhost:1883',
       },
     },
-  );
+  );*/
 
+  await app.listen(3000);
+
+  //Documentación de la API en Swagger
   const options = new DocumentBuilder()
     .setTitle('SmartGlobalManufacturing')
     .setDescription('SmartGlobalManufacturing')
@@ -32,8 +35,8 @@ async function bootstrap() {
       showRequestDuration: true,
     },
   });
-  await app.listen(3000);
-  await appMqtt.listen();
+
+  //await appMqtt.listen();
 }
 
 bootstrap();
